@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ActivityIndicator, StyleSheet } from 'react-native';
 
-const ProductDetails = ({ route }) => {
-  const { id } = route.params; // Retrieve the product ID from navigation params
+const ProductDetails = ({ props }) => {
+  const { id } = props.route.params;
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 

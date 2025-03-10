@@ -1,21 +1,51 @@
-import React from 'react';
-import { View, TextInput, StyleSheet, Button, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, StyleSheet, Button, Text ,Alert} from 'react-native';
+import HomePage from './HomePage';
 
 const Login  = ({navigation,...props}) => {
-    const {email} = props.route.params;
-    console.log('email:',email);
-    const handleOnpress = () =>{
-        navigation.navigate('HomePage');
-    };
-    return (
-        <View style={styles.container}>
-            <Text>Enter Username</Text>
-            <TextInput placeholder="Enter Email" value={email} keyboardType="text" style={styles.TextInput}/>
-            <Text>Enter Password</Text>
-            <TextInput placeholder="Enter Password"  keyboardType="numeric" style={styles.TextInput}/>
-            <Button title="Login" style={styles.Button} onPress={handleOnpress}/>
-        </View>
-    );
+    const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('https://api.escuelajs.co/api/v1/users');
+      const users = await response.json();
+      const user = users.find(
+        (u) => u.email === email && u.password === password
+      );
+
+      if (user) {
+        Alert.alert('Login Successful', `Your User ID is: ${user.id}`);
+        navigation.navigate(HomePage,{id:user.id});
+      } else {
+        Alert.alert('Error', 'Invalid email or password');
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      Alert.alert('Error', 'Something went wrong. Please try again.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <Button title="Login" onPress={handleLogin} />
+    </View>
+  );
 };
 const styles = StyleSheet.create({
     container:{

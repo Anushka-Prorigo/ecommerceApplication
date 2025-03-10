@@ -3,9 +3,11 @@ import {View, Alert, StyleSheet, TouchableOpacity,Text} from 'react-native';
 import Menubar from './Menubar';
 import { useNavigation } from '@react-navigation/native';
 
-const HomePage = () => {
+const HomePage = (props) => {
   const[menuVisible,setMenuVisible] = useState(false);
   const navigation = useNavigation();
+  const id = props.route?.id;
+  Alert.alert("id is:",id);
   const toggleMenu = () =>{
     setMenuVisible(!menuVisible);
   };
@@ -28,7 +30,8 @@ const HomePage = () => {
         break;
       case 'profile':
         Alert.alert('Profile clicked');
-        navigation.navigate('Profile');
+        Alert.alert("id is:",id);
+        navigation.navigate('Profile',{id});
         break;
       case 'products':
           Alert.alert('Products clicked');
