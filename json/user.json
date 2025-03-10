@@ -1,0 +1,28 @@
+{
+    "user":[
+        {
+            "user_id":1,
+            "user_name":"Joker",
+            "user_email":"joker@gmail.com",
+            "user_password":"joker123"
+        },
+        {
+            "user_id":2,
+            "user_name":"jony",
+            "user_email":"jony@gmail.com",
+            "user_password":"jony123"
+        },
+        {
+            "user_id":3,
+            "user_name":"jeny",
+            "user_email":"jeny@gmail.com",
+            "user_password":"jeny123"
+        },
+        {
+            "user_id":4,
+            "user_name":"Jerry",
+            "user_email":"Jerry@gmail.com",
+            "user_password":"jerry123"
+        }
+    ]
+}
