@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, Alert } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
 const Profile = ({ props }) => {
   const [user, setUser] = useState(null);
@@ -8,13 +8,13 @@ const Profile = ({ props }) => {
   useEffect(() => {
      const fetchUserDetails = async () => {
       try {
-        const response = await fetch(`https://api.escuelajs.co/api/v1/users/1`);
+        const response = await fetch("https://api.escuelajs.co/api/v1/users/1");
         const userData = await response.json();
         setUser(userData);
       } catch (error) {
-        console.error("Error fetching user details:", error);
+        console.error('Error fetching user details:', error);
       } finally {
-        setLoading(false); // Stop loading indicator
+        setLoading(false);
       }
     };
 
@@ -44,7 +44,7 @@ const Profile = ({ props }) => {
       <Text style={styles.label}>Email: {user.email}</Text>
       <Text style={styles.label}>Role: {user.role}</Text>
       <Text style={styles.label}>Avatar:</Text>
-      <Text>{user.avatar}</Text> {/* Replace this with an <Image> if needed */}
+      <Text>{user.avatar}</Text>
     </View>
   );
 };
@@ -52,14 +52,14 @@ const Profile = ({ props }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f5f5f5",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 20,
   },
   label: {
@@ -68,12 +68,12 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   errorText: {
     fontSize: 18,
-    color: "red",
+    color: 'red',
   },
 });
 

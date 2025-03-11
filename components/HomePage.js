@@ -7,7 +7,6 @@ const HomePage = (props) => {
   const[menuVisible,setMenuVisible] = useState(false);
   const navigation = useNavigation();
   const id = props.route?.id;
-  Alert.alert("id is:",id);
   const toggleMenu = () =>{
     setMenuVisible(!menuVisible);
   };
@@ -29,8 +28,6 @@ const HomePage = (props) => {
         navigation.navigate('Users');
         break;
       case 'profile':
-        Alert.alert('Profile clicked');
-        Alert.alert("id is:",id);
         navigation.navigate('Profile',{id});
         break;
       case 'products':

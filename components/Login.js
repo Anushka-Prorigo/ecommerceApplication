@@ -4,7 +4,7 @@ import HomePage from './HomePage';
 
 const Login  = ({navigation,...props}) => {
     const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     try {
@@ -15,7 +15,6 @@ const Login  = ({navigation,...props}) => {
       );
 
       if (user) {
-        Alert.alert('Login Successful', `Your User ID is: ${user.id}`);
         navigation.navigate(HomePage,{id:user.id});
       } else {
         Alert.alert('Error', 'Invalid email or password');
@@ -28,7 +27,7 @@ const Login  = ({navigation,...props}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Login Page</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -52,6 +51,8 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:'center',
         borderColor:'black',
+        marginTop:80,
+        marginBottom:80,
         borderWidth:1,
     },
     TextInput:{
@@ -66,6 +67,10 @@ const styles = StyleSheet.create({
         margin:10,
         width:50,
         color:'blue',
+    },
+    title:{
+      fontSize:35,
+      fontWeight:'bold',
     },
 });
 export default Login;

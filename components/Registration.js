@@ -11,7 +11,7 @@ const Registration  = () => {
     const handlePress = () =>{
         navigation.navigate('Login',{email:email});
         setActivityIndicator(true);
-        setTimeout(() =>{
+        setTimeout(() => {
             setActivityIndicator(false);
         },3000);
     };

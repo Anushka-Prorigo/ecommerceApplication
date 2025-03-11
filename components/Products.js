@@ -1,11 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, Alert } from 'react-native';
 
 const Products = () => {
   const [data, setData] = useState([]);
   const navigation = useNavigation();
-  const name = 'Hello';
+  const idRef = useRef(null);
 
   const getApiCall = async () => {
     try {
@@ -19,6 +19,7 @@ const Products = () => {
   };
 
   const handlePressableEvent = (id) => {
+    idRef.current = id;
     Alert.alert('product clicked');
     navigation.navigate('ProductDetails',{id});
   };

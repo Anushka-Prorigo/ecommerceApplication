@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {Text, View, FlatList, StyleSheet, ScrollView, Pressable, ActivityIndicator} from 'react-native';
-import user from '/Users/anushkap/Documents/reactnative/ecommerceApplication/json/user.json';
+import {Text, View, FlatList, StyleSheet, ActivityIndicator} from 'react-native';
+
 const Users = () => {
   const[data,setData] = useState('');
   const [loading, setLoading] = useState(true);

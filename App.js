@@ -11,6 +11,7 @@ import Profile from './components/Profile';
 import RadioButtons from './components/RadioButtons';
 import Products from './components/Products';
 import ProductDetails from './components/ProductDetails';
+import UpdateProductDetails from './components/ProductDetails';
 
 const Stack = createNativeStackNavigator();
 function App () {
@@ -27,6 +28,7 @@ function App () {
             <Stack.Screen name="radioButtons" component={RadioButtons} options={{headerShadowVisible:false}}/>
             <Stack.Screen name="Products" component={Products} options={{headerShadowVisible:false}}/>
             <Stack.Screen name="ProductDetails" component={ProductDetails} options={{headerShadowVisible:false}}/>
+            <Stack.Screen name="UpdateProductDetails" component={UpdateProductDetails} options={{headerShadowVisible:false}}/>
          </Stack.Navigator>
     </NavigationContainer>
    );
