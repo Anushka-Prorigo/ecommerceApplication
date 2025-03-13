@@ -1,37 +1,41 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet, Button } from 'react-native';
+import { View, Text, TextInput, ActivityIndicator, StyleSheet, Button } from 'react-native';
 
 const ProductDetails = ({ route }) => {
     const { id } = route.params || {};
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigation = useNavigation();
 
     useEffect(() => {
-        if (!id) {return;}
+        if (id) {
+            handleInputChange();
+        }},[id]);
 
-        const fetchProductDetails = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const response = await fetch(`https://freetestapi.com/api/v1/products/${id}`);
-                if (!response.ok) throw new Error('Failed to fetch product details');
-                const productData = await response.json();
-                setProduct(productData);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
+    const handleInputChange = (field, value) => {
+        setProduct({ ...product, [field]: value });
+    };
+
+    const handleSaveChanges = async () => {
+        try {
+            const response = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(product),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to save product changes');
             }
-        };
 
-        fetchProductDetails();
-    }, [id]);
-
-    const handleUpdateProductDetails = () => {
-        navigation.navigate('UpdateProductDetails', { product });
+            alert('Product details updated successfully!');
+        } catch (error) {
+            alert(`Error: ${error.message}`);
+        }
     };
 
     if (loading) {
@@ -56,13 +60,29 @@ const ProductDetails = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{product.name}</Text>
-            <Text style={styles.description}>{product.description}</Text>
-            <Text style={styles.price}>Price: ${product.price}</Text>
-            <Button
-                title="Update Product Details"
-                onPress={handleUpdateProductDetails}
+            <Text style={styles.label}>Product Name:</Text>
+            <TextInput
+                style={styles.input}
+                value={product.name}
+                onChangeText={(text) => handleInputChange('name', text)}
             />
+
+            <Text style={styles.label}>Product Description:</Text>
+            <TextInput
+                style={styles.input}
+                value={product.description}
+                onChangeText={(text) => handleInputChange('description', text)}
+            />
+
+            <Text style={styles.label}>Product Price:</Text>
+            <TextInput
+                style={styles.input}
+                value={String(product.price)}
+                keyboardType="numeric"
+                onChangeText={(text) => handleInputChange('price', parseFloat(text))}
+            />
+
+            <Button title="Save Changes" onPress={handleSaveChanges} />
         </View>
     );
 };
@@ -72,26 +92,25 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 16,
         justifyContent: 'center',
-        alignItems: 'center',
     },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 8,
-    },
-    description: {
+    label: {
         fontSize: 16,
-        marginBottom: 8,
-        textAlign: 'center',
-    },
-    price: {
-        fontSize: 18,
         fontWeight: 'bold',
+        marginBottom: 4,
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 8,
+        marginBottom: 16,
+        borderRadius: 4,
+        fontSize: 16,
     },
     errorText: {
         color: 'red',
         fontSize: 16,
         fontWeight: 'bold',
+        textAlign: 'center',
     },
 });
 

@@ -1,43 +1,41 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Button } from 'react-native';
 
 const ProductDetails = ({ route }) => {
-    const { id } = route.params || {};  // Extract product id from params
-    const [product, setProduct] = useState(null);  // Store product details
-    const [loading, setLoading] = useState(true);  // Track loading state
-    const [error, setError] = useState(null);  // Track error state
+    const { id } = route.params || {};
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigation = useNavigation();
 
-    useEffect(() => {
-        if (!id) return;  // If no id, do not fetch
+    useEffect (() =>{
+        fetchProductDetails();
+    },[id]);
 
         const fetchProductDetails = async () => {
-            setLoading(true);  // Start loading
-            setError(null);  // Reset any previous errors
+            setLoading(true);
+            setError(null);
 
             try {
                 const response = await fetch(`https://freetestapi.com/api/v1/products/${id}`);
                 if (!response.ok) throw new Error('Failed to fetch product details');
                 const productData = await response.json();
-                setProduct(productData);  // Update product state
+                setProduct(productData);
             } catch (error) {
-                setError(error.message);  // Set error state
+                setError(error.message);
             } finally {
-                setLoading(false);  // Stop loading
+                setLoading(false);
             }
         };
 
-        fetchProductDetails();  // Call fetch function
-    }, [id]);  // Only re-run the effect if id changes
-
     const handleUpdateProductDetails = () => {
-        // Navigate to UpdateProductDetails screen, passing the product data
-        navigation.navigate('UpdateProductDetails', { product });
+        navigation.navigate('UpdateProductDetails',{id:product.id});
     };
 
     if (loading) {
-        return <ActivityIndicator size="large" color="#0000ff" />;  // Show loading indicator if loading is true
+        return <ActivityIndicator size="large" color="#0000ff" />;
     }
 
     if (error) {
@@ -45,7 +43,7 @@ const ProductDetails = ({ route }) => {
             <View style={styles.container}>
                 <Text style={styles.errorText}>Error: {error}</Text>
             </View>
-        );  // Display error message if fetch fails
+        );
     }
 
     if (!product) {
@@ -53,7 +51,7 @@ const ProductDetails = ({ route }) => {
             <View style={styles.container}>
                 <Text>Product not found or ID missing.</Text>
             </View>
-        );  // Handle case when no product is found
+        );
     }
 
     return (
@@ -63,7 +61,7 @@ const ProductDetails = ({ route }) => {
             <Text style={styles.price}>Price: ${product.price}</Text>
             <Button
                 title="Update Product Details"
-                onPress={handleUpdateProductDetails}  // Trigger navigation to update product
+                onPress={handleUpdateProductDetails}
             />
         </View>
     );

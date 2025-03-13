@@ -12,6 +12,7 @@ const Registration  = () => {
     const [image,setImage] = useState('https://i.imgur.com/LDOO4Qs.jpg');
     const navigation = useNavigation();
     const[activityIndicator,setActivityIndicator] = useState(false);
+
     const handlePress = () =>{
         navigation.navigate('Login',{email:email});
         setActivityIndicator(true);
