@@ -29,14 +29,14 @@ const Login  = ({navigation,...props}) => {
     <View style={styles.container}>
       <Text style={styles.title}>Login Page</Text>
       <TextInput
-        style={styles.input}
+        style={styles.TextInput}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
       />
       <TextInput
-        style={styles.input}
+        style={styles.TextInput}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
@@ -50,10 +50,9 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         alignItems:'center',
-        borderColor:'black',
         marginTop:80,
         marginBottom:80,
-        borderWidth:1,
+      
     },
     TextInput:{
         borderWidth:1,

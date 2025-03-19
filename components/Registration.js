@@ -4,14 +4,14 @@ import RadioButtons from './RadioButtons';
 import { useNavigation } from '@react-navigation/native';
 
 const Registration  = () => {
-    const[id,setId] = useState('');
+    const [id,setId] = useState('');
     const [userName,setUserName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [role,setRole] = useState('customer');
     const [image,setImage] = useState('https://i.imgur.com/LDOO4Qs.jpg');
     const navigation = useNavigation();
-    const[activityIndicator,setActivityIndicator] = useState(false);
+    const [activityIndicator,setActivityIndicator] = useState(false);
 
     const handlePress = () =>{
         navigation.navigate('Login',{email:email});
@@ -40,7 +40,7 @@ const Registration  = () => {
     };
     return (
         <View style={styles.container}>
-            <Text style={{color:'blck' ,fontSize:30,marginBottom:10}}>Registration Page</Text>
+            <Text style={{color:'black' ,fontSize:30,marginBottom:10}}>Registration Page</Text>
              <Text>Enter Id</Text>
             <TextInput
               id="id"
@@ -50,7 +50,7 @@ const Registration  = () => {
               style={styles.TextInput}
               onFocus={() => console.log('TextInput focused')}/>
             <Text>Enter Email</Text>
-            <TextInput 
+            <TextInput
               id="userEmail"
               value={email}
               onChangeText={setEmail}

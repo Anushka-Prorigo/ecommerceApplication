@@ -31,7 +31,7 @@ const HomePage = (props) => {
         navigation.navigate('Profile',{id});
         break;
       case 'products':
-          Alert.alert('Products clicked');
+          // Alert.alert('Products clicked');
           navigation.navigate('Products');
           break;
       default:
